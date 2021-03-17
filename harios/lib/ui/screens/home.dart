@@ -7,12 +7,16 @@ import 'package:harios/ui/resources/icons.dart';
 
 import 'package:harios/ui/screens/appointment.dart';
 
+import 'account.dart';
+import 'history.dart';
+import 'service.dart';
+
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
 }
 
- _homeAppbar (){
+_homeAppbar() {
   return AppBar(
     automaticallyImplyLeading: false,
     elevation: 0.0,
@@ -34,159 +38,31 @@ class Home extends StatefulWidget {
     ),
     actions: <Widget>[
       Padding(
-        padding: EdgeInsets.only(right: 20.0),
-        child: GestureDetector(
-          onTap: () {},
-          child: SvgPicture.string(
-              bellIcon,
-              allowDrawingOutsideViewBox: true,
-            )
-        )
-      ),
+          padding: EdgeInsets.only(right: 20.0),
+          child: GestureDetector(
+              onTap: () {},
+              child: SvgPicture.string(
+                bellIcon,
+                allowDrawingOutsideViewBox: true,
+              ))),
       Padding(
-        padding: EdgeInsets.only(right: 20.0),
-        child: GestureDetector(
-          onTap: () {},
-          child:  SvgPicture.string(
+          padding: EdgeInsets.only(right: 20.0),
+          child: GestureDetector(
+            onTap: () {},
+            child: SvgPicture.string(
               cartIcon,
               allowDrawingOutsideViewBox: true,
             ),
-        )
-      ),
+          )),
     ],
-  );
-}
-
-Widget _services({List items}) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: <Widget>[
-      _service(
-        icon: items[0][0],
-        label: items[0][1]
-
-      ),
-      _service(
-        icon: items[1][0],
-        label: items[1][1]
-      )
-    ],
-  );
-}
-
-Widget _service({String icon, String label, VoidCallback ontap}) {
-  return Container(
-    height: 120,
-    width: 150,
-    decoration: BoxDecoration(
-      color: Colors.white,
-      borderRadius: BorderRadius.circular(17.0),
-      boxShadow: [
-          BoxShadow(
-            color: Color.fromRGBO(0, 0, 0, 0.16),
-            blurRadius: 6.0, // soften the shadow
-            offset: Offset(
-              0.0, // Move to right 10  horizontally
-              3.0, // Move to bottom 10 Vertically
-            ),
-          )
-        ],
-    ),
-    child: Column(
-      // crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Container(
-            width: 60,
-            height: 50,
-            child: SvgPicture.string(
-              icon,
-              fit: BoxFit.contain,
-              color: AppColors.primaryColor,
-              allowDrawingOutsideViewBox: true,
-            ),
-          ),
-        ),
-        Text(
-          label,
-          style: TextStyle(
-            fontSize: 19,
-            color: AppColors.secondaryColor
-          ),
-        )
-      ],
-    ),
-  );
-}
-
-get _promoBanner {
-  return Padding(
-    padding: EdgeInsets.all(25),
-    child: Container(
-      height: 170,
-      decoration: BoxDecoration(
-        color: AppColors.secondaryColor,
-        borderRadius: BorderRadius.circular(17.0),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Row(
-          children: <Widget>[
-            Expanded(
-              flex: 5,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    'Invite your friends',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25
-                    ),
-                  ),
-                  SizedBox(height: 10,),
-                  Container(
-                    width: 200,
-                    height: 35,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(5.0),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Get up to 10% Discount',
-                        style: TextStyle(
-                          fontFamily: 'Lobster',
-                          fontSize: 17,
-                          color: AppColors.primaryColor
-                        ),
-                      ),
-                    ),
-                  )
-                ],
-              )
-            ),
-            Expanded(
-              flex: 4,
-              child: Column(
-                children: <Widget>[
-                  // Text('Invite your friends')
-                ],
-              )
-            )
-          ],
-        ),
-      )
-    ),
   );
 }
 
 Widget _floatingButton({BuildContext context}) {
-  return  FloatingActionButton(
-    onPressed: () { 
-      Navigator.push( context,
+  return FloatingActionButton(
+    onPressed: () {
+      Navigator.push(
+        context,
         MaterialPageRoute(builder: (context) => Appointment()),
       );
     },
@@ -199,39 +75,8 @@ Widget _floatingButton({BuildContext context}) {
   );
 }
 
- _bottomBar(){
-  return BottomAppBar(
-
-    
-    shape: CircularNotchedRectangle(),
-    
-    child:BottomNavigationBar(
-      unselectedItemColor: Colors.grey,
-      showUnselectedLabels: true,
-      items:<BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Feed',
-           
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Feed',
-           
-          ),
-
-      ]
-
-    ),
-    
-    // color: Colors.blueGrey
-  );
-}
-
-
-
 class _HomeState extends State<Home> {
-   int _selectedIndex = 0;
+  int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -239,30 +84,88 @@ class _HomeState extends State<Home> {
     });
   }
 
+   _bottomBar() {
+      return BottomAppBar(
+        notchMargin: 12,
+        shape: CircularNotchedRectangle(),
+
+        child: Row(
+          children: [
+            Expanded(
+              flex: 3,
+              child: BottomNavigationBar(
+                backgroundColor: Colors.white,
+                elevation: 0,
+                showSelectedLabels: false,
+                // unselectedItemColor: Colors.grey,
+                showUnselectedLabels: true,
+                // selectedItemColor: Colors.blue,
+                items: <BottomNavigationBarItem>[
+                  BottomNavigationBarItem(
+                    icon: SvgPicture.string(
+                      homeIcon,
+                      color: AppColors.textColor,
+                    ),
+                    label: '',
+                    activeIcon: SvgPicture.string(
+                      homeIcon,
+                      color: AppColors.primaryColor,
+                    ),
+                  ),
+                  BottomNavigationBarItem(
+                    icon: SvgPicture.string(
+                      userIcon,
+                       color: AppColors.textColor,
+                    ),
+                    label: '',
+                     activeIcon: SvgPicture.string(
+                      userIcon,
+                        color: AppColors.primaryColor,
+                    )
+                  ),
+                  BottomNavigationBarItem(
+                    icon: SvgPicture.string(
+                      registerIcon,
+                      color: AppColors.textColor,
+                    ),
+                    label: '',
+                    activeIcon: SvgPicture.string(
+                      registerIcon,
+                      color: AppColors.primaryColor,
+                    )
+                  ),
+                ],
+                currentIndex: _selectedIndex,
+                onTap: _onItemTapped,
+              ),
+            ),
+            Expanded(
+                flex: 1,
+                child: SizedBox(
+                  width: 10,
+                )),
+          ],
+        ),
+
+        // color: Colors.blueGrey
+      );
+    }
+
+  List<Widget> basePages = <Widget>[Service(), History(), Account()];
+
   @override
   Widget build(BuildContext context) {
+   
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: _homeAppbar(),
-        body: Column(
-          children: <Widget>[
-            _promoBanner,
-            SizedBox(height: 30),
-            Padding(
-              padding: const EdgeInsets.only(left: 25, right: 25),
-              child: _services(items: [[nailsIcon, 'Nails'], [manicureIcon, 'Manicure']])
-            ),
-             Padding(
-              padding: const EdgeInsets.only(top:25.0, left: 25, right: 25),
-              child: _services(items: [[pedicureIcon, 'Pedicure'], [makeupIcon, 'Makeup']])
-            )
-          ],
-        ),
+        body: basePages.elementAt(_selectedIndex),
         floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
         floatingActionButton: _floatingButton(context: context),
         bottomNavigationBar: _bottomBar(),
-      )
+      ),
     );
   }
 }

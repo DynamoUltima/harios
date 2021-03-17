@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "512223411037",
+    "project_id": "harios-b71ee",
+    "storage_bucket": "harios-b71ee.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:512223411037:android:8f055604d1abc090af86b4",
+        "android_client_info": {
+          "package_name": "com.example.harios"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "512223411037-k8o6ko971nhmt9254ddq12r3a7jfvc53.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWG9ZICy98UZ01Q8sH7r8YhOv4oDDTEes"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "512223411037-k8o6ko971nhmt9254ddq12r3a7jfvc53.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
